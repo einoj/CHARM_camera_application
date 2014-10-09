@@ -1,27 +1,85 @@
 import numpy as np
 import cv2
 import os
+import sys
+from PyQt4 import QtGui, QtCore
 
-if os.name == 'nt':
-    cap = cv2.VideoCapture(1)
-else:
-    cap = cv2.VideoCapture(0)
+class Video():
+    def __init__(self):
+        self.record = False
+        if os.name == 'nt':
+            # Camera index starts at 1 in widows
+            self.cam1 = cv2.VideoCapture(1)
+        else:
+            self.cam1 = cv2.VideoCapture(0)
 
-#cap2 = cv2.VideoCapture(2)
+    def startCapture(self):
+        self.capture = True
+        while(self.capture):
+            # Capture frame-by-frame
+            self.ret, self.frame = self.cam1.read()
+            # Display the resulting frame
+            cv2.imshow('Camera 1',self.frame) #cv2.imshow('frame2',frame2)
+            cv2.waitKey(5)
 
-while(True):
-    # Capture frame-by-frame
-    ret, frame = cap.read()
-    #ret2, frame2 = cap2.read()
+    def startRecording(self, a):
+        #Define the codec and create VideoWriter oject        
+        #fourcc = cv2.VideoWriter_fourcc(*'XVID')
+        print a
+        fourcc = cv2.cv.CV_FOURCC(*'XVID')
+        out = cv2.VideoWriter('output.avi', fourcc, 24.0, (640,480))
+        self.record = True
+        self.capture = False
+        while (self.record):
+            self.ret, self.frame = self.cam1.read()
+            out.write(self.frame)
+            cv2.imshow('Camera 1', self.frame)
+            cv2.waitKey(5)
+        self.capture = True
 
-    # Our operations on the frame come here
-    #gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    def stopRecording(self):
+       self.record = False 
 
-    # Display the resulting frame
-    cv2.imshow('Camera 1',frame) #cv2.imshow('frame2',frame2)
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+    def quit(self):
+        self.capture = False
+        cap = self.cam1
+        cv2.destroyAllWindows()
+        cap.release()
+        QtCore.QCoreApplication.quit()        
 
-# When everything done, release the capture
-cap.release()
-cv2.destroyAllWindows()
+class Window(QtGui.QWidget):
+    def __init__(self):
+
+        QtGui.QWidget.__init__(self)
+        self.setWindowTitle('Control Panel')
+
+        self.capture = Video()
+
+        self.start_record = QtGui.QPushButton('Record',self)
+        self.start_record.clicked.connect(self.capture.startRecording)
+
+        self.stop_record = QtGui.QPushButton('Stop Record',self)
+        self.stop_record.clicked.connect(self.capture.stopRecording)
+
+        self.quit_button = QtGui.QPushButton('Quit',self)
+        self.quit_button.clicked.connect(self.capture.quit)
+
+        vbox = QtGui.QVBoxLayout(self)
+        vbox.addWidget(self.start_record)
+        vbox.addWidget(self.stop_record)
+        vbox.addWidget(self.quit_button)
+
+        self.setLayout(vbox)
+        self.setGeometry(100,100,200,200)
+        self.show()
+        self.capture.startCapture()
+
+    def buttonClicked(self):
+        print "button clicked"
+
+if __name__ == '__main__':
+
+    import sys
+    app = QtGui.QApplication(sys.argv)
+    window = Window()
+    sys.exit(app.exec_())
