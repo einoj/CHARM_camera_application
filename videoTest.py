@@ -22,10 +22,10 @@ class Video():
             cv2.imshow('Camera 1',self.frame) #cv2.imshow('frame2',frame2)
             cv2.waitKey(5)
 
-    def startRecording(self, a):
+    def startRecording(self):
         #Define the codec and create VideoWriter oject        
         #fourcc = cv2.VideoWriter_fourcc(*'XVID')
-        print a
+        print "recording"
         fourcc = cv2.cv.CV_FOURCC(*'XVID')
         out = cv2.VideoWriter('output.avi', fourcc, 24.0, (640,480))
         self.record = True
@@ -56,17 +56,13 @@ class Window(QtGui.QWidget):
         self.capture = Video()
 
         self.start_record = QtGui.QPushButton('Record',self)
-        self.start_record.clicked.connect(self.capture.startRecording)
-
-        self.stop_record = QtGui.QPushButton('Stop Record',self)
-        self.stop_record.clicked.connect(self.capture.stopRecording)
+        self.start_record.clicked.connect(self.buttonClicked)
 
         self.quit_button = QtGui.QPushButton('Quit',self)
         self.quit_button.clicked.connect(self.capture.quit)
 
         vbox = QtGui.QVBoxLayout(self)
         vbox.addWidget(self.start_record)
-        vbox.addWidget(self.stop_record)
         vbox.addWidget(self.quit_button)
 
         self.setLayout(vbox)
@@ -75,7 +71,13 @@ class Window(QtGui.QWidget):
         self.capture.startCapture()
 
     def buttonClicked(self):
-        print "button clicked"
+        sender = self.sender()
+        if sender.text() == 'Record':
+            sender.setText("Stop Recording")
+            self.capture.startRecording()
+        else:
+            sender.setText('Record')
+            self.capture.stopRecording()
 
 if __name__ == '__main__':
 
