@@ -10,18 +10,19 @@ class Video():
         if os.name == 'nt':
             # Camera index starts at 1 in widows
             self.cam1 = cv2.VideoCapture(1)
+            self.cam2 = cv2.VideoCapture(2)
+            self.cam3 = cv2.VideoCapture(3)
         else:
             self.cam1 = cv2.VideoCapture(0)
-            try:
-                self.cam2 = cv2.VideoCapture(1)
-            except:
-                print "No second camera"
+            self.cam2 = cv2.VideoCapture(1)
+            self.cam3 = cv2.VideoCapture(2)
 
     def startCapture(self):
         self.capture = True
         while(self.capture):
             # Capture frame-by-frame
             self.ret, self.frame = self.cam1.read()
+            self.ret2, self.fram2 =  self.cam2.read()
             # Display the resulting frame
             cv2.imshow('Camera 1',self.frame) #cv2.imshow('frame2',frame2)
             cv2.waitKey(5)
@@ -59,7 +60,7 @@ class Window(QtGui.QWidget):
 
         self.capture = Video()
 
-        self.start_record = QtGui.QPushButton('Record',self)
+        self.start_record = QtGui.QPushButton('Record Cam 1',self)
         self.start_record.clicked.connect(self.buttonClicked)
 
         self.quit_button = QtGui.QPushButton('Quit',self)
