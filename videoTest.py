@@ -22,9 +22,12 @@ class Video():
         while(self.capture):
             # Capture frame-by-frame
             self.ret, self.frame = self.cam1.read()
-            self.ret2, self.fram2 =  self.cam2.read()
+            self.ret2, self.frame2 =  self.cam2.read()
+            self.ret3, self.frame3 =  self.cam3.read()
             # Display the resulting frame
-            cv2.imshow('Camera 1',self.frame) #cv2.imshow('frame2',frame2)
+            cv2.imshow('Camera 1',self.frame) 
+            cv2.imshow('Camera 2',self.frame2)
+            cv2.imshow('Camera 3',self.frame3)
             cv2.waitKey(5)
 
     def startRecording(self):
@@ -39,6 +42,8 @@ class Video():
             self.ret, self.frame = self.cam1.read()
             out.write(self.frame)
             cv2.imshow('Camera 1', self.frame)
+            cv2.imshow('Camera 2',self.frame2)
+            cv2.imshow('Camera 3',self.frame3)
             cv2.waitKey(5)
         self.capture = True
 
