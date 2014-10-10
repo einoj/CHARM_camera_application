@@ -1,21 +1,15 @@
 import numpy as np
 import cv2
-import os
 import sys
 from PyQt4 import QtGui, QtCore
 
 class Video():
     def __init__(self):
         self.record = False
-        if os.name == 'nt':
-            # Camera index starts at 1 in widows
-            self.cam1 = cv2.VideoCapture(1)
-            self.cam2 = cv2.VideoCapture(2)
-            self.cam3 = cv2.VideoCapture(3)
-        else:
-            self.cam1 = cv2.VideoCapture(0)
-            self.cam2 = cv2.VideoCapture(1)
-            self.cam3 = cv2.VideoCapture(2)
+        #Instansiate the three cameras
+        self.cam1 = cv2.VideoCapture(0)
+        self.cam2 = cv2.VideoCapture(1)
+        self.cam3 = cv2.VideoCapture(2)
 
     def startCapture(self):
         self.capture = True
