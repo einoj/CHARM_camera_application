@@ -12,6 +12,10 @@ class Video():
             self.cam1 = cv2.VideoCapture(1)
         else:
             self.cam1 = cv2.VideoCapture(0)
+            try:
+                self.cam2 = cv2.VideoCapture(1)
+            except:
+                print "No second camera"
 
     def startCapture(self):
         self.capture = True
