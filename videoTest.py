@@ -59,7 +59,7 @@ class Video():
             self.capture = True
             self.recording = False
 
-    def stopRecording(a):
+    def stopRecording(self,a):
         if a == 1:
             self.record1 = False
         if a == 2:
@@ -115,37 +115,37 @@ class Window(QtGui.QWidget):
 
     def record1(self):
         sender = self.sender()
-        if sender.text() == 'Record':
-            sender.setText("Stop Recording")
+        if sender.text() == 'Record cam 1':
+            sender.setText("Stop Recording cam 1")
             self.capture.record1 = True
             self.capture.startRecording()
         else:
-            sender.setText('Record')
+            sender.setText('Record cam 1')
             self.capture.stopRecording(1)
 
     def record2(self):
         sender = self.sender()
-        if sender.text() == 'Record':
-            sender.setText("Stop Recording")
+        if sender.text() == 'Record cam 2':
+            sender.setText("Stop Recording cam 2")
             self.capture.record2 = True
             self.capture.startRecording()
         else:
-            sender.setText('Record')
+            sender.setText('Record cam 2')
             self.capture.stopRecording(2)
 
     def record3(self):
         sender = self.sender()
-        if sender.text() == 'Record':
-            sender.setText("Stop Recording")
+        if sender.text() == 'Record cam 3':
+            sender.setText("Stop Recording cam 3")
             self.capture.record3 = True
             self.capture.startRecording()
         else:
-            sender.setText('Record')
+            sender.setText('Record cam 3')
             self.capture.stopRecording(3)
 
     def recordAll(self):
         sender = self.sender()
-        if sender.text() == 'Record':
+        if sender.text() == 'Record All':
             self.capture.record1 = True
             self.capture.record2 = True
             self.capture.record3 = True
@@ -155,7 +155,7 @@ class Window(QtGui.QWidget):
             self.start_record3.setText("Stop Recording")
             self.capture.startRecording()
         else:
-            sender.setText('Record')
+            sender.setText('Record All')
             self.capture.stopRecording(4)
 
 if __name__ == '__main__':
