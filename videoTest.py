@@ -22,7 +22,7 @@ class Video():
             cv2.imshow('Camera 1',self.frame) 
             cv2.imshow('Camera 2',self.frame2)
             cv2.imshow('Camera 3',self.frame3)
-            cv2.waitKey(5)
+            cv2.waitKey(20)
 
     def startRecording(self):
         #Define the codec and create VideoWriter oject        
@@ -38,7 +38,7 @@ class Video():
             cv2.imshow('Camera 1', self.frame)
             cv2.imshow('Camera 2',self.frame2)
             cv2.imshow('Camera 3',self.frame3)
-            cv2.waitKey(5)
+            cv2.waitKey(20)
         self.capture = True
 
     def stopRecording(self):
