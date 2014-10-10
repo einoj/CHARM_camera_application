@@ -44,6 +44,8 @@ class Video():
             self.capture = False
             while (self.record1 or self.record2 or self.record3):
                 self.ret, self.frame = self.cam1.read()
+                self.ret2, self.frame2 =  self.cam2.read()
+                self.ret3, self.frame3 =  self.cam3.read()
                 if self.record1:
                     out1.write(self.frame)
                 if  self.record2:
