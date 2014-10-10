@@ -39,8 +39,8 @@ class Video():
             self.recording = True
             fourcc = cv2.cv.CV_FOURCC(*'XVID')
             out1 = cv2.VideoWriter('output1.avi', fourcc, 24.0, (640,480))
-            out2 = cv2.VideoWriter('output1.avi', fourcc, 24.0, (640,480))
-            out3 = cv2.VideoWriter('output1.avi', fourcc, 24.0, (640,480))
+            out2 = cv2.VideoWriter('output2.avi', fourcc, 24.0, (640,480))
+            out3 = cv2.VideoWriter('output3.avi', fourcc, 24.0, (640,480))
             self.capture = False
             while (self.record1 or self.record2 or self.record3):
                 self.ret, self.frame = self.cam1.read()
