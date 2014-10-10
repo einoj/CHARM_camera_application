@@ -6,6 +6,8 @@ from PyQt4 import QtGui, QtCore
 class Video():
     def __init__(self):
         self.record1 = False
+        self.record2 = False
+        self.record3 = False
         self.recording = False
         #Instansiate the three cameras
         self.cam1 = cv2.VideoCapture(0)
