@@ -1,6 +1,7 @@
 import numpy as np
 import cv2
 import sys
+from time import strftime
 from PyQt4 import QtGui, QtCore
 
 class Video():
@@ -38,9 +39,12 @@ class Video():
         else:
             self.recording = True
             fourcc = cv2.cv.CV_FOURCC(*'XVID')
-            self.out1 = cv2.VideoWriter('output1.avi', fourcc, 33.0, (640,480))
-            self.out2 = cv2.VideoWriter('output2.avi', fourcc, 33.0, (640,480))
-            self.out3 = cv2.VideoWriter('output3.avi', fourcc, 33.0, (640,480))
+            filename1 = strftime("CAM1_%Y-%m-%d_%H:%M:%S.avi")
+            filename2 = strftime("CAM2_%Y-%m-%d_%H:%M:%S.avi")
+            filename3 = strftime("CAM3_%Y-%m-%d_%H:%M:%S.avi")
+            self.out1 = cv2.VideoWriter(filename1, fourcc, 33.0, (640,480))
+            self.out2 = cv2.VideoWriter(filename2, fourcc, 33.0, (640,480))
+            self.out3 = cv2.VideoWriter(filename3, fourcc, 33.0, (640,480))
             self.capture = False
             while (self.record1 or self.record2 or self.record3):
                 self.ret, self.frame = self.cam1.read()
