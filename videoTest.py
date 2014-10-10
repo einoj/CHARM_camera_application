@@ -25,7 +25,7 @@ class Video():
             cv2.imshow('Camera 1',self.frame) 
             cv2.imshow('Camera 2',self.frame2)
             cv2.imshow('Camera 3',self.frame3)
-            cv2.waitKey(20)
+            cv2.waitKey(30)
 
     def startRecording(self):
         #Define the codec and create VideoWriter oject        
@@ -38,9 +38,9 @@ class Video():
         else:
             self.recording = True
             fourcc = cv2.cv.CV_FOURCC(*'XVID')
-            self.out1 = cv2.VideoWriter('output1.avi', fourcc, 24.0, (640,480))
-            self.out2 = cv2.VideoWriter('output2.avi', fourcc, 24.0, (640,480))
-            self.out3 = cv2.VideoWriter('output3.avi', fourcc, 24.0, (640,480))
+            self.out1 = cv2.VideoWriter('output1.avi', fourcc, 33.0, (640,480))
+            self.out2 = cv2.VideoWriter('output2.avi', fourcc, 33.0, (640,480))
+            self.out3 = cv2.VideoWriter('output3.avi', fourcc, 33.0, (640,480))
             self.capture = False
             while (self.record1 or self.record2 or self.record3):
                 self.ret, self.frame = self.cam1.read()
@@ -51,11 +51,11 @@ class Video():
                 if  self.record2:
                     self.out2.write(self.frame2)
                 if  self.record3:
-                    self.out2.write(self.frame3)
+                    self.out3.write(self.frame3)
                 cv2.imshow('Camera 1', self.frame)
                 cv2.imshow('Camera 2',self.frame2)
                 cv2.imshow('Camera 3',self.frame3)
-                cv2.waitKey(20)
+                cv2.waitKey(30)
             self.capture = True
             self.recording = False
 
