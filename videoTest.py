@@ -50,8 +50,6 @@ class Video():
                     out2.write(self.frame2)
                 if  self.record3:
                     out2.write(self.frame3)
-                out2.write(self.frame2)
-                out3.write(self.frame2)
                 cv2.imshow('Camera 1', self.frame)
                 cv2.imshow('Camera 2',self.frame2)
                 cv2.imshow('Camera 3',self.frame3)
