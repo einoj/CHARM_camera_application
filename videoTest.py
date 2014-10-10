@@ -62,8 +62,8 @@ class Video():
             self.recording = True
             fourcc = cv2.cv.CV_FOURCC(*'XVID')
             filename1 = strftime("CAM1_%Y-%m-%d_%H-%M-%S.avi")
-            filename2 = a[:3] + '2' + a[4:]
-            filename3 = a[:3] + '3' + a[4:]
+            filename2 = filename1[:3] + '2' + filename1[4:]
+            filename3 = filename1[:3] + '3' + filename1[4:]
             self.out1 = cv2.VideoWriter(filename1, fourcc, 33.0, (640,480))
             self.out2 = cv2.VideoWriter(filename2, fourcc, 33.0, (640,480))
             self.out3 = cv2.VideoWriter(filename3, fourcc, 33.0, (640,480))
